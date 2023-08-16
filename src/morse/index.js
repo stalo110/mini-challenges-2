@@ -1,3 +1,4 @@
+
 const MORSE_CODE = {
   "-.-.--": "!",
   ".-..-.": '"',
@@ -54,10 +55,41 @@ const MORSE_CODE = {
   "--..": "Z",
   "..--.-": "_",
   "...---...": "SOS",
-};
+  };
 
-Object.freeze(MORSE_CODE);
+  Object.freeze(MORSE_CODE)
+  
+function morse(text) {  
+  let result = "";
+  let holdingArr = []; 
+  
 
-function morse(text) {}
+  if(typeof text == 'string' && typeof text !== 'object'){
+
+      const wordArr = text.split('   ');
+
+      for(const word of wordArr){
+          let charArr = word.split(' '); 
+          
+          for (const char of charArr){
+              const trimmer = char.trim();
+              if(MORSE_CODE[trimmer]){
+                  holdingArr.push(MORSE_CODE[char]);
+              }
+          }
+          holdingArr.push(' ');
+      }
+  
+     return result = holdingArr.join('').trim();
+      
+  } else if( text == ''){
+      return '';
+  }else{
+      throw Error('please provide morse string');
+  }
+}
+
+console.log(morse('-.. . -.-. .-   -.. . ...-'));
+
 
 module.exports = morse;
